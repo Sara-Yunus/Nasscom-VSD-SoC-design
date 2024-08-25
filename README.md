@@ -33,6 +33,57 @@ Setting up OpenLane in interactive mode
 ./flow.tcl -interactive
 # it'll turn the prompt to a percentage symbol
 ```
+`image1'
+
+Importing all the packgaes to work with
+```
+# to get ready to execute the command
+% package require openlane 0.9
+```
+Preparing Design files
+```
+# for working on the design of Picorv32 Processor
+% prep -design picorv32
+```
+A new file named "runs" is created in picorv32a directory. 
+
+`image2'
+#### Lecture 3 - Review files after design prep and run synthesis
+This 'runs' file contains a directory of named with date of its creation. Here 25-08_06-10. As of now, everything except the 'tmp' folder will be empty in this. Merged.lef is stored here.
+
+`The config.tcl file present in the folder 25-08_06-10 shows/contains all the default parameters taken by the run. Using this we can check whether the modifications done is correctly reflected in the execution of the design.` 
+
+`The cmds.log takes the record of all the commands used. This gets populated as additional steps are done.`
+
+Running the synthesis step
+
+``` run_synthesis```
+
+`image3'
+#### Lecture 4 - OpenLANE Project Git Link Description
+A github repository is suggested to go through which I cannot find on the Github.
+
+A YouTube video is also suggested, which is 
+https://www.youtube.com/live/Vhyv0eq_mLU?si=vghy-LKS7MWhH_xY
+#### Lecture 5 - Steps to Characterize Synthesis Results
+
+1st objective of this workshop is to find the flip-flop ratio. 
+
+`image4'
+
+```math
+Flip  flop  Ratio = {No. of D  flip  flops}/{Total  no.  of  cells} = {1613}/{14876} = 0.108429
+```
+```math
+Percentage of D flip-flops = 0.108429 * 100 = 10.8429%
+```
+The synthesised netlist is now in the 'results' file of the 'runs' folder.
+`image5'
+
+The last report to be generated in Yosys gives you the actual synthesis statistic report.
+`image6'
+
+` we can exit the screen after using less command with 'q' key.`
 
 
 
