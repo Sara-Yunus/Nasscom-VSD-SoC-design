@@ -15,6 +15,27 @@
 
 ### Section 3 - Get familiar with open-source EDA tools
 #### Lecture 1 - OpenLANE Directory structure in detail
+Invoking the OpenLane tool.
+```bash
+# Change the directory to a required location using the following command in the terminal.
+cd Desktop/work/tools/openlane_working_dir/openlane
+```
+
+#### Lecture 2 - Design Preparation Step
+Opening the OpenLane tool
+```
+# type only the below text
+docker
+```
+Setting up OpenLane in interactive mode
+```
+# type the below given
+./flow.tcl -interactive
+# it'll turn the prompt to a percentage symbol
+```
+
+
+
 #### Lecture 2 - Design Preparation Step
 #### Lecture 3 - Review files after design prep and run synthesis
 #### Lecture 4 - OpenLANE Project Git Link Description
