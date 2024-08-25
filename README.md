@@ -85,13 +85,6 @@ The last report to be generated in Yosys gives you the actual synthesis statisti
 
 ` we can exit the screen after using less command with 'q' key.`
 
-
-
-#### Lecture 2 - Design Preparation Step
-#### Lecture 3 - Review files after design prep and run synthesis
-#### Lecture 4 - OpenLANE Project Git Link Description
-#### Lecture 5 - Steps to Characterize Synthesis Results
-
 ## Day 2: Good floorplan vs bad floorplan and introduction to library cells
 ### Section 1 - Chip Floor planning considerations
 #### Lecture 1 - Utilization factor and aspect ratio
@@ -100,8 +93,35 @@ The last report to be generated in Yosys gives you the actual synthesis statisti
 #### Lecture 4 - Power planning
 #### Lecture 5 - Pin placement and logical cell placement blockage
 #### Lecture 6 - Steps to run floorplan using OpenLANE
+`run_floorplan`
+`image7'
 #### Lecture 7 - Review floorplan files and steps to view floorplan
+Reviewing the completion of the floorplan stage in ioPlacer.log 
+
+
+to calculate the area of the die 
+`image8'
+According to floorplan def
+1000 Unit Distance
+1 Micron Die width in unit
+
+ distance=660685−0=660685 Die height in unit distance=671405−0=671405
+Distance in microns
+= Value in Unit Distance 1000 Die width in microns = 660685 1000 = 660.685 Microns Die height in microns = 671405 1000 = 671.405 Microns Area of die in microns = 660.685∗671.405 = 443587.212425 sq microns
+
+#to open Magic layout
+
+` /home/Sara/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def & `
+
 #### Lecture 8 - Review floorplan layout in Magic
+to move the layput to the centre of full screen, first press s (small s) to select the layout and then press v (small v) to move it to the centre
+`image9'
+to zoom in an area onn the layout bring cursor to their then press left click extend the cursor till where you to zoom the right click, and then press z it'll zoom. and shift+z will zoom out.
+
+further to loock at any component bring the cursir on that then press s
+
+tkcon window tells where the cursor is exactly on the layout 
+`image10'
 
 ### Section 2 - Library Binding and Placement
 #### Lecture 1 - Netlist binding and initial place design
@@ -109,6 +129,8 @@ The last report to be generated in Yosys gives you the actual synthesis statisti
 #### Lecture 3 - Final placement optimization
 #### Lecture 4 - Need for libraries and characterization
 #### Lecture 5 - Congestion-aware placement using RePlAce
+
+`run_placement`
 
 ### Section 3 - Cell design and characterization flows
 #### Lecture 1 - Inputs for cell design flow
