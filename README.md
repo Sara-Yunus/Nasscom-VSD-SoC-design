@@ -1,2 +1,2 @@
-# Nasscom-VSD-SoC-design
-Nasscom Certification Program - Cohort of 21st Aug'24 to 3rd Sept'24
+# 2 Weeks Nasscom Certification Program in Digital VLSI SoC design and planning 
+### (21st Aug'24 - 3rd Sept'24)
