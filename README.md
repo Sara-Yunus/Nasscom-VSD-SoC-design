@@ -141,4 +141,27 @@ Extracting the inverter in .spice file
 img23
 
 Modifying the sky130_inv.spice with the below given SPICE DECK
-``` 
+``` * SPICE3 file created from sky130_inv.ext - technology: sky130A
+
+.option scale=0.01u
+.include ./libs/pshort.lib
+.include ./libs/nshort.lib
+
+//.subckt sky130_inv A Y VPWR VGND
+M1001 Y A VGND VGND nshort_model.0 ad=1435 pd=152 as=1365 ps=148 w=35 l=23
+M1000 Y A VPWR VPWR pshort_model.0 ad=1443 pd=152 as=1517 ps=156 w=37 l=23
+VDD VPWR 0 3.3V
+VSS VGND 0 0V
+Va A VGND PULSE(0V 3.3V 0 0.1ns 0.1ns 2ns 4ns)
+C0 A Y 0.05fF
+C1 Y VPWR 0.11fF
+C2 A VPWR 0.07fF
+C3 Y 0 2fF
+C4 VPWR 0 0.59fF
+//C5 VPWR VGND 0.781f
+//.ends
+.tran 1n 20n
+.control
+run
+.endc
+.end ```
