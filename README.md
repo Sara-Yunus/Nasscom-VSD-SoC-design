@@ -122,7 +122,7 @@ img19
 ## Day-3 Objective: PLUGGING-IN CUSTOM INVERTER CELL IN THE OPENLANE FLOW.
 
 Command to clone the got repo in the openlane directory
-``` got clone
+``` gIt clone ```
 
 This will create a folder called vsdstdcelldesign in the directory
 img20
@@ -134,14 +134,15 @@ Opening the inverter layout in Magic layout tool
 img22
 
 Extracting the inverter in .spice file
-* pwd
-* extract all
-* ext2spice cthresh 0 rthresh 0
-* ext2spice
+1- ``` pwd ```
+2- ``` extract all ```
+3- ``` ext2spice cthresh 0 rthresh 0 ```
+4- ``` ext2spice ```
 img23
 
 Modifying the sky130_inv.spice with the below given SPICE DECK
-``` * SPICE3 file created from sky130_inv.ext - technology: sky130A
+```
+* SPICE3 file created from sky130_inv.ext - technology: sky130A
 
 .option scale=0.01u
 .include ./libs/pshort.lib
