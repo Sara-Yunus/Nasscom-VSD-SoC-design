@@ -140,6 +140,8 @@ Extracting the inverter in .spice file
 4- ``` ext2spice ```
 img23
 
+
+
 Modifying the sky130_inv.spice with the below given SPICE DECK
 ```
 * SPICE3 file created from sky130_inv.ext - technology: sky130A
@@ -165,4 +167,22 @@ C4 VPWR 0 0.59fF
 .control
 run
 .endc
-.end ```
+.end
+```
+
+Running the SPICE simulation in Ngspice tool
+``` ngspice sky130_inv.spice ```
+
+plotting the transient response 
+``` plot y vs time a ```
+img24
+ 
+img25
+
+##### Characterising the Inverter cell
+
+Finding the values of 
+* rise transition
+* fall transition
+* cell rise propagation delay
+* cell fall propagation delay
