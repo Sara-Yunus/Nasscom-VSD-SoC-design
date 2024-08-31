@@ -68,3 +68,46 @@ Flip  flop  Ratio = {No. of D  flip  flops}/{Total  no.  of  cells} = {1613}/{14
 ```math
 Percentage of D flip-flops = 0.108429 * 100 = 10.8429%
 ```
+
+## Day-2 Objective: FINDING DIE AREA
+
+Modifying the design-related config.tcl 
+
+* using ``` less ``` to view the text file
+* using ``` vim ``` to edit the text file
+
+  img8
+
+ For editing the text file:
+ * use ``` i ``` to start editing
+ * use ``` esc ``` to halt editing
+ * use ``` :wq ``` to save the changes and exit the editable text file
+ * use ``` q ``` to exit the non-editable text file
+
+System Default values of FP_IO_VMETAL, FP_IO_HMETAL & FP_CORE_UTIL can be found in 
+``` ../Desktop/work/tools/openlane_working_dir/openlane/configurations$ less floorplan.tcl ```
+img9
+
+Modifications are shown in the below image
+img10
+
+After making the changes to the variables we can run floorplan in the OpenLane flow
+``` run_floorplan ```
+This creates a .def file in the ../runs/31-08_20-19/results/floorplan 
+img11
+
+// To check whether the changes made in the config.tcl has taken precedence over the system default values or not we go to 
+
+
+
+Now, viewing the floorplan in Magic layout tool.
+img12
+img13
+img14
+img15
+
+
+``` run_placement ```
+img16
+img17
+img18
