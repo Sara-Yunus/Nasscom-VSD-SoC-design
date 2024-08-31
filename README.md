@@ -111,3 +111,34 @@ img15
 img16
 img17
 img18
+
+##### Finding the die area.
+
+img19
+
+
+
+
+## Day-3 Objective: PLUGGING-IN CUSTOM INVERTER CELL IN THE OPENLANE FLOW.
+
+Command to clone the got repo in the openlane directory
+``` got clone
+
+This will create a folder called vsdstdcelldesign in the directory
+img20
+
+copying .tech file to the vsdstdcelldesign folder add sky130A.tech to it
+img21
+
+Opening the inverter layout in Magic layout tool
+img22
+
+Extracting the inverter in .spice file
+* pwd
+* extract all
+* ext2spice cthresh 0 rthresh 0
+* ext2spice
+img23
+
+Modifying the sky130_inv.spice with the below given SPICE DECK
+``` 
