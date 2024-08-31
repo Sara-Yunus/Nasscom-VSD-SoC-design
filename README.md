@@ -20,7 +20,8 @@ Setting up OpenLane in interactive mode
 ./flow.tcl -interactive
 # it'll turn the prompt to a percentage symbol
 ```
-![image1](https://github.com/user-attachments/assets/5f79b866-36e8-4bb3-87ea-58cc3b4acbc1)
+img1
+
 
 
 Importing all the packgaes to work with
@@ -31,28 +32,35 @@ Importing all the packgaes to work with
 Preparing Design files
 ```
 # for working on the design of Picorv32 Processor
-% prep -design picorv32
+% prep -design picorv32a
 ```
+img2
+
 A new file named "runs" is created in picorv32a directory. 
-This 'runs' file contains a directory of named with date of its creation. Here 25-08_06-10. 
-![image2](https://github.com/user-attachments/assets/6dac452f-9995-4050-a50a-cf4283169222)
+This 'runs' file contains a directory named with the date of its creation. Here 31-08_20-19. 
+img3
 
-As of now, everything except the 'tmp' folder will be empty in this. Merged.lef is stored here.
 
-Running the synthesis step
+
+#### Running the synthesis stage
 
 ``` run_synthesis```
 
-![image3](https://github.com/user-attachments/assets/4e50441f-8981-41bd-bae5-2c4cdeeeec01)
-
-![image5](https://github.com/user-attachments/assets/cac85962-33d8-45f6-ab6c-de77dfc29457)
-
-![image6](https://github.com/user-attachments/assets/8ed67ee8-d773-40e1-9053-f4d6bdd95d30)
+img4
 
 
-1st objective of this workshop is to find the flip-flop ratio. 
+The synthesised netlist is now under the synthesis in the 'results' file of the 'runs' folder.
 
-![image4](https://github.com/user-attachments/assets/1acbbc44-a108-4e1e-a955-8c04a26cd611)
+img5
+
+The timing reports will be preset in the reports directory.
+The last report generated in the YOSYS gives you the actual statistic report.
+
+img6
+
+##### Finding the flip-flop ratio. 
+
+img7
 
 ```math
 Flip  flop  Ratio = {No. of D  flip  flops}/{Total  no.  of  cells} = {1613}/{14876} = 0.108429
