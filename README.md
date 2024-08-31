@@ -1,6 +1,10 @@
 # Nasscom Certification Program in Digital VLSI SoC design and planning 
 ### (21st Aug'24 - 3rd Sept'24)
 
+
+![Screenshot (359)](https://github.com/user-attachments/assets/3ef44963-52a7-429b-966f-39056c8b37d5)
+
+
 ## Day 1:  Inception of open-source EDA, OpenLANE and Sky130 PDK
 ### Section 1 - How to talk to computers
 #### Lecture 1 - Introduction to QFN-48 Package, chip, pads, core, die and IPs
