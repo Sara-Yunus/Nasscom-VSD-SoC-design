@@ -276,3 +276,43 @@ Running placement
 
 img37
 img38
+
+
+Placement layout
+img39
+
+expanded
+img40
+
+### Lab Introduction to Magic tool options and DRC rules
+
+Downloading the lab files using the below given command in the home directory
+``` wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz ```
+
+Unzipping the downloaded zip file using the below command 
+``` tar xfz drc_tests.tgz ```
+
+
+
+
+
+
+
+
+
+##  Day-4 Objective: OPTIMISING SYNTHESIS FOR SLACK VIOLATION AND PERFORMING CTS.
+
+created a file called ``` pre_sta.conf ``` in openlane directory using ``` vim ``` command.
+img41
+
+
+Then created a file called ``` my_base.sdc ``` in ..design/picorv32/src using ``` vim ``` command.
+img42
+
+then 
+``` .../openlane$ sta pre_sta.conf ```
+img43
+the slack violation value is same as what it was in synthesis step(img33)
+
+Optimisng the design for slack reduction
+
