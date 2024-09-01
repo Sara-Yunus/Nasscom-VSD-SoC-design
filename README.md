@@ -186,3 +186,93 @@ Finding the values of
 * fall transition
 * cell rise propagation delay
 * cell fall propagation delay
+
+max value = 3.3V
+min value = 0V
+
+  **Rise Transition** - Time taken for the output waveform to go to 20% of its max value from 80% of its max value.
+
+  @ 20% 0f 3.3V : x0 = 2.18001e-09, y0 = 0.660167
+  @ 80% 0f 3.3V : x0 = 2.24569e-09, y0 = 2.63983
+  Rise time = 0.06568 ns
+
+  **Fall Transition** - Time taken for the output waveform to go to 80% of its max value from 20% of its max value.
+
+  @ 80% 0f 3.3V : x0 = 4.05262e-09, y0 = 2.64
+  @ 20% 0f 3.3V : x0 = 4.09507e-09, y0 = 0.659574
+  Fall time = 0.04245 ns
+
+  **Cell Rise Delay** - Time difference between input and output at 50% of max value when the output is rising.
+
+  output @ 50% of 3.3V : x0 = 2.21008e-09, y0 = 1.59948
+  input @ 50% of 3.3V : x0 = 2.15202e-09, y0 = 1.59948
+  Cell Rise time = 0.05806 ns
+
+  **Cell Fall Delay** - Time difference between input and output at 50% of max value when the output is falling.
+
+  output @ 50% of 3.3V : x0 = 4.07822e-09, y0 = 1.60063
+  input @ 50% of 3.3V : x0 = 4.04851e-09, y0 = 1.60063
+  Cell Rise time = 0.02971 ns
+
+  ###### Creating the .lef file
+
+  We find the tracks info for the standard cell in the following location 
+  ``` ..pdks/sky130A/libs.tech/openlane/sky130_fd_sc_hd$ less tracks.info ```
+  
+  img26
+
+  Activated grid in the layout in shown in below image
+  -pressing ' g ' activates the grid in the Magic layout
+
+  img27
+
+  Converging grid with the tracks info
+  
+  -in the tkcon window:
+  * ``` help grid ```
+  * ``` grid 0.46um 0.34um 0.23um 0.17um ```
+  img28
+
+Giving a new name to our custom cell and generating .lef file
+
+-in the tkcon window: 
+* ``` save sky130A_vsdinv.mag ```
+* ``` lef write ```
+A new .lef file will be added in vsdstdcelldesign directory
+img29
+
+Adding the .lef file to the design src file
+img30
+
+Adding the 3 .lib files to the design src file
+img31 
+
+modifying design related config.tcl to the below given content
+```
+
+```
+
+ img33
+
+ img34
+
+
+ Running floorplan
+
+ As we completed with synthesis stage, now we need to perform floorplan by using the following commands
+
+init_floorplan
+
+place_io
+
+tap_decap_or
+
+img35
+
+img36
+
+
+Running placement 
+
+img37
+img38
