@@ -316,3 +316,115 @@ the slack violation value is same as what it was in synthesis step(img33)
 
 Optimisng the design for slack reduction
 
+Noticed that the net instance _10566_ has a fanout of 4 and is driven by or gate of size 3_4
+img44
+
+so replacinf this instance with _13165_ or gate of size 3_4
+img45
+
+with this we observe reduction in slack from -23.89 to -23.5184
+img46
+
+
+Noticed that the or gate of driving strenth 2 driving OA gate has more delay
+img47
+
+so replacing this instance with _13132_ or gate of size 4_4
+img48 
+
+with this we observe reduction in slack from -23.5184 to -23.5119
+img49
+
+So,now earlier the slack was -23.89 now it is -23.5119. That is, the slack has been reduced by 0.3781
+// -- command to verify that the instance _13132_ has been replaced from or4_2 to or4_4 --
+// ``` report_checks -from _26365_ -to _27762_ -through _13132 ```
+
+Replacing the old netlist with the new one post the fixes done above
+
+```
+//making a copy of old netlist
+.../results/synthesis$ cp picorv32a.synthesis.v picorv32a.synthesis_old.v
+```
+img50
+
+NOW, overwriting the original netlist with the modified by passing the below command in OpenSTA flow itself 
+```
+write_verilog /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/25-03_18-52/results/synthesis/picorv32a.synthesis.v
+```
+Updation of netlist can be verified by the new time indicated prior to verilog file 
+img51
+
+Verification that the instance _13132_ is replaced to sky130_fd_sc_hd__or4_4
+img52
+
+NOW RUNNING FLOORPLAN ON THE UPDATED NETLIST IN THE **OPENLANE** FLOW
+img53
+RUNNING PLACEMENT 
+img54
+
+RUNNING CTS
+``` run_cts ```
+a new addition to ..results/synthesis directory 
+img55
+
+clock buffer can be viewed in CTS layout in Magic
+img56
+
+
+Timing analysis post-CTS( USING OpenROAD)
+```
+# Command to run OpenROAD tool
+openroad
+
+# Reading lef file
+read_lef /openLANE_flow/designs/picorv32a/runs/24-03_10-03/tmp/merged.lef
+
+# Reading def file
+read_def /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/cts/picorv32a.cts.def
+
+# Creating an OpenROAD database to work with
+write_db pico_cts.db
+```
+creation of database can be verified in openlane directory
+img57
+
+```
+# Loading the created database in OpenROAD
+read_db pico_cts.db
+
+# Read netlist post CTS
+read_verilog /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/synthesis/picorv32a.synthesis_cts.v
+
+# Read library for design
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+
+# In case of error while reading liberty
+read_liberty /openLANE_flow/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib
+
+# Link design and library
+link_design picorv32a
+
+# Read in the custom sdc we created
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+
+# Setting all cloks as propagated clocks
+set_propagated_clock [all_clocks]
+
+# Check syntax of 'report_checks' command
+help report_checks
+
+# Generating custom timing report
+report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
+
+# Exit to OpenLANE flow
+exit
+```
+img58
+
+img59
+
+hold slack met
+img60
+
+setup slack met 
+img61
