@@ -291,8 +291,31 @@ Downloading the lab files using the below given command in the home directory
 
 Unzipping the downloaded zip file using the below command 
 ``` tar xfz drc_tests.tgz ```
+img82
 
+.magicrc file below
+img83
 
+Opening Magic tool
+``` magic -d XR & ``` this will open Magic with an empty window shown below
+img84
+with this, go to File option in the menu and select Open. 
+img85
+from here, select met3.mag and open
+ *OR*
+ in the terminal pass ``` magic -d XR met3 & ```
+ img86
+
+ select the area of any of the elements and using ``` drc why ``` in the tkcon window will tell which drc rule got violated for that design
+ img87
+
+For metal3 all rules are related to drawn layers, except for rule m3.4
+ Now, select an area in the gui and guide the pointer on to the metal 3 layer and press P. The selected region will be filled with metal 3. 
+ Now in console window type the command ``` cif see VIA2 ``` , The metal 3 filled area will be filled VIA2 mask.
+
+ 
+Incorrectly implemented poly.9 simple rule correction
+img1`
 
 
 
