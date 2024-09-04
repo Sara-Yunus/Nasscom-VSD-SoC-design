@@ -11,7 +11,7 @@ cd Desktop/work/tools/openlane_working_dir/openlane
 
 Opening the OpenLane tool
 ```
-# type only the below text
+# to type only the below text
 docker
 ```
 Setting up OpenLane in interactive mode
@@ -96,7 +96,8 @@ After making the changes to the variables we can run floorplan in the OpenLane f
 This creates a .def file in the ../runs/31-08_20-19/results/floorplan 
 ![img11](https://github.com/user-attachments/assets/69711fb8-a29b-443a-98cf-2febce408894)
 
-// To check whether the changes made in the config.tcl has taken precedence over the system default values or not we go to 
+// To check whether the changes made in the config.tcl have taken precedence over the system default values or not we go to 
+``` ...logs/floorlan ``` in the date named directory.
 
 
 
@@ -106,37 +107,46 @@ Now, viewing the floorplan in Magic layout tool.
 ![img14](https://github.com/user-attachments/assets/a081d071-9d2e-4b2a-b971-1549381eb009)
 ![img15](https://github.com/user-attachments/assets/26c37732-0f55-41cb-8203-c134aaa2002b)
 
-
-``` run_placement ```
-![img16](https://github.com/user-attachments/assets/ccb780ad-5036-4d20-8a2c-a3e06e2b42fb)
-![img17](https://github.com/user-attachments/assets/61945ea9-f8f0-4e09-b908-122c3c6bf008)
-![img18](https://github.com/user-attachments/assets/a7132eaa-5f5f-4faa-a121-7cb0ff43c6d4)
-
-##### Finding the die area.
+#### Finding the die area.
 
 ![img19](https://github.com/user-attachments/assets/ca967d9f-3628-4e8e-a324-686f7f03ee84)
 
 
+After floorplan, next stage is placement. We do ``` run_placement ``` in openlane flow. 
+As a result of placement a .def is created in ``` ...results/placement ``` in the date named directory.
+
+Magic layout of placement are shown below.
+
+![img16](https://github.com/user-attachments/assets/ccb780ad-5036-4d20-8a2c-a3e06e2b42fb)
+![img17](https://github.com/user-attachments/assets/61945ea9-f8f0-4e09-b908-122c3c6bf008)
+![img18](https://github.com/user-attachments/assets/a7132eaa-5f5f-4faa-a121-7cb0ff43c6d4)
+
+config.tcl in runs directory tells which all configurations are taken in the current flow.
 
 
 ## Day-3 Objective: PLUGGING-IN CUSTOM INVERTER CELL IN THE OPENLANE FLOW.
 
-Command to clone the got repo in the openlane directory
-``` gIt clone ```
+Command to clone the get repo in the openlane directory
+``` git clone https://github.com/nickson-jose/vsdstdcelldesign.git ```
 
 This will create a folder called vsdstdcelldesign in the directory
 ![img20](https://github.com/user-attachments/assets/dc71b5f0-d7ae-43de-8f65-ae777d55c61c)
 
-copying .tech file to the vsdstdcelldesign folder add sky130A.tech to it
+copying .tech file to the vsdstdcelldesign folder, i.e. adding sky130A.tech to it
 ![img21](https://github.com/user-attachments/assets/3dbe0385-4b05-4f32-80df-20d74a147ef3)
 
-Opening the inverter layout in Magic layout tool
+Opening the inverter layout in Magic layout tool using
+``` magic -T sky130A.tech sky130_inv.mag & ```
 ![img22](https://github.com/user-attachments/assets/5a650fa3-8eb4-4049-addb-ed9998bebfd4)
 
-Extracting the inverter in .spice file
+For extracting the inverter in .spice file, we pass following command one by one in Magic tkcon window:
+
 1- ``` pwd ```
+
 2- ``` extract all ```
+
 3- ``` ext2spice cthresh 0 rthresh 0 ```
+
 4- ``` ext2spice ```
 ![img23](https://github.com/user-attachments/assets/73b791af-5346-4cbb-96f7-3b1ad59a3b99)
 
@@ -173,9 +183,12 @@ run
 Running the SPICE simulation in Ngspice tool
 ``` ngspice sky130_inv.spice ```
 
-plotting the transient response 
+Plotting the transient response 
 ``` plot y vs time a ```
+
 ![img24](https://github.com/user-attachments/assets/2bfa0a55-b1c3-49b7-8d74-4bbf017cb808)
+
+ We get the below plot.
  
 ![img25](https://github.com/user-attachments/assets/335037a3-bb94-4e94-92f8-e1248ba491e8)
 
@@ -193,36 +206,44 @@ min value = 0V
   **Rise Transition** - Time taken for the output waveform to go to 20% of its max value from 80% of its max value.
 
   @ 20% 0f 3.3V : x0 = 2.18001e-09, y0 = 0.660167
+  
   @ 80% 0f 3.3V : x0 = 2.24569e-09, y0 = 2.63983
+  
   Rise time = 0.06568 ns
 
   **Fall Transition** - Time taken for the output waveform to go to 80% of its max value from 20% of its max value.
 
   @ 80% 0f 3.3V : x0 = 4.05262e-09, y0 = 2.64
+  
   @ 20% 0f 3.3V : x0 = 4.09507e-09, y0 = 0.659574
+  
   Fall time = 0.04245 ns
 
   **Cell Rise Delay** - Time difference between input and output at 50% of max value when the output is rising.
 
   output @ 50% of 3.3V : x0 = 2.21008e-09, y0 = 1.59948
+  
   input @ 50% of 3.3V : x0 = 2.15202e-09, y0 = 1.59948
+  
   Cell Rise time = 0.05806 ns
 
   **Cell Fall Delay** - Time difference between input and output at 50% of max value when the output is falling.
 
   output @ 50% of 3.3V : x0 = 4.07822e-09, y0 = 1.60063
+  
   input @ 50% of 3.3V : x0 = 4.04851e-09, y0 = 1.60063
+  
   Cell Rise time = 0.02971 ns
 
-  ###### Creating the .lef file
+  #### Creating the .lef file
 
   We find the tracks info for the standard cell in the following location 
   ``` ..pdks/sky130A/libs.tech/openlane/sky130_fd_sc_hd$ less tracks.info ```
   
  ![img26](https://github.com/user-attachments/assets/fa054023-5d0f-4674-89d9-06d5d7e8db8f)
 
-  Activated grid in the layout in shown in below image
-  -pressing ' g ' activates the grid in the Magic layout
+  Pressing ' g ' activates the grid in the Magic layout.
+  Activated grid in the layout is shown in below image.
 
   ![img27](https://github.com/user-attachments/assets/fa7c6132-71f8-44f5-8529-8db45e8ff955)
 
@@ -231,6 +252,7 @@ min value = 0V
   -in the tkcon window:
   * ``` help grid ```
   * ``` grid 0.46um 0.34um 0.23um 0.17um ```
+  * 
   ![img28](https://github.com/user-attachments/assets/d0462ed1-e898-4c94-9c2a-4bee4d7bbf4b)
 
 Giving a new name to our custom cell and generating .lef file
@@ -238,6 +260,7 @@ Giving a new name to our custom cell and generating .lef file
 -in the tkcon window: 
 * ``` save sky130A_vsdinv.mag ```
 * ``` lef write ```
+* 
 A new .lef file will be added in vsdstdcelldesign directory
 ![img29](https://github.com/user-attachments/assets/544bc355-6c9c-48c6-9bd3-46cb24393f3e)
 
@@ -252,6 +275,7 @@ modifying design related config.tcl to the below given content
 
 ```
 
+To add the customised cell to the design flow we pass the below highlighted commands one at a time before we run synthesis.
 ![img32](https://github.com/user-attachments/assets/4605b40d-95b4-4134-9767-74eafbef66a8)
 ![img33](https://github.com/user-attachments/assets/722e397d-8887-4160-b010-753c236bfaab)
 
@@ -259,31 +283,29 @@ modifying design related config.tcl to the below given content
 
 
 
- Running floorplan
-
- As we completed with synthesis stage, now we need to perform floorplan by using the following commands
-
+With the completion of synthesis, now we need to perform the floorplan by using the following commands:
+```
 init_floorplan
 
 place_io
 
 tap_decap_or
+```
 
 ![img35](https://github.com/user-attachments/assets/303a7486-c693-4b4f-bd68-84d1ceb7779f)
 
 ![img36](https://github.com/user-attachments/assets/cf31cd4f-9464-47a2-943e-89b5626db078)
 
 
-Running placement 
+Then, ``` run_placement ```
 
 ![img37](https://github.com/user-attachments/assets/71256571-943d-4b70-b906-341a082b5c8e)
-![img38](https://github.com/user-attachments/assets/832912ab-5992-4114-a15e-94c3e9bb3355)
-
 
 Placement layout
+![img38](https://github.com/user-attachments/assets/832912ab-5992-4114-a15e-94c3e9bb3355)
 ![img39](https://github.com/user-attachments/assets/3cd88f4e-c035-49c1-9c44-419c944562c7)
 
-expanded
+Expanded view
 ![img40](https://github.com/user-attachments/assets/f8f9f670-583c-4f58-a75c-b3f946acbc19)
 
 ### Lab Introduction to Magic tool options and DRC rules
