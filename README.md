@@ -20,7 +20,7 @@ Setting up OpenLane in interactive mode
 ./flow.tcl -interactive
 # it'll turn the prompt to a percentage symbol
 ```
-img1
+![img1](https://github.com/user-attachments/assets/796579a9-10a1-49aa-9342-fbacb622acdb)
 
 
 
