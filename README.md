@@ -64,6 +64,8 @@ The last report generated in the YOSYS gives the actual statistic report.
 
 ```math
 Flip  flop  Ratio = {No. of D  flip  flops}/{Total  no.  of  cells} = {1613}/{14876} = 0.108429
+
+![equation](http://latex.codecogs.com/gif.latex?Flip flop Ratio%3D%5Cfrac%7BNo. of D flip flops%7D%7BTotal no. of cells%7D)  
 ```
 ```math
 Percentage of D flip-flops = 0.108429 * 100 = 10.8429%
