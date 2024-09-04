@@ -54,11 +54,11 @@ The synthesised netlist is now under the synthesis in the 'results' file of the 
 ![img5](https://github.com/user-attachments/assets/fef9121c-0ab1-45c8-b31a-e5ea5ffff974)
 
 The timing reports will be preset in the reports directory.
-The last report generated in the YOSYS gives you the actual statistic report.
+The last report generated in the YOSYS gives the actual statistic report.
 
 ![img6](https://github.com/user-attachments/assets/346cd28f-652d-4196-99fe-939a655e6dea)
 
-##### Finding the flip-flop ratio. 
+### Finding the flip-flop ratio. 
 
 ![img7](https://github.com/user-attachments/assets/b17dd5e5-97de-474c-8364-2ee56eb74dc9)
 
