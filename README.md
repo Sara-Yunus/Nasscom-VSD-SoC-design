@@ -272,7 +272,29 @@ Adding the 3 .lib files to the design src file
 
 modifying design related config.tcl to the below given content
 ```
+# Design
+set ::env(DESIGN_NAME) "picorv32a"
 
+set ::env(VERILOG_FILES) "./designs/picorv32a/src/picorv32a.v"
+set ::env(SDC_FILE) "./designs/picorv32a/src/picorv32a.sdc"
+
+set ::env(CLOCK_PERIOD) "12.000"
+set ::env(CLOCK_PORT) "clk"
+
+
+set ::env(CLOCK_NET) $::env(CLOCK_PORT)
+
+set ::env(LIB_SYNTH) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+set ::env(LIB_FASTEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__fast.lib"
+set ::env(LIB_SLOWEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__slow.lib"
+set ::env(LIB_TYPICAL) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+
+set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/src/*.lef]
+
+set filename $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/$::env(PDK)_$::env(STD_CELL_LIBRARY)_config.tcl
+if { [file exists $filename] == 1} {
+        source $filename
+}
 ```
 
 To add the customised cell to the design flow we pass the below highlighted commands one at a time before we run synthesis.
@@ -344,8 +366,11 @@ Incorrectly implemented poly.9 simple rule correction
 ![img89](https://github.com/user-attachments/assets/b7754fde-4291-455f-8fa5-3ae82cb594f9)
 ![img90](https://github.com/user-attachments/assets/f6be65f0-76b1-4b82-a8cb-4deb09650058)
 
-
-
+Now, to open the sky130A.tech file from the drc_tests director.
+Navigate to the keywords ' poly.9 ' in the file and make copy of the required lines and change *nsd and alldiff to allpolynonres.
+Save the changes
+<img width="1440" alt="Screenshot 2024-09-02 at 11 57 30 AM" src="https://github.com/user-attachments/assets/267d418b-6f82-4cfc-a26d-b0f2df71f5ae">
+<img width="1440" alt="Screenshot 2024-09-02 at 12 30 01 PM" src="https://github.com/user-attachments/assets/c684ee2e-23ad-4261-8781-5396b4521a1d">
 
 
 
