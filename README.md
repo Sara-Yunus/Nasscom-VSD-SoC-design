@@ -361,20 +361,55 @@ For metal3 all rules are related to drawn layers, except for rule m3.4
  ![img88](https://github.com/user-attachments/assets/be59f4e0-952b-4d94-92d2-ba39d36e2960)
 
  
-Incorrectly implemented poly.9 simple rule correction
+##### Incorrectly implemented poly.9 simple rule correction
+The correct rule is shown below in the screenshot of https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html#m3
 ![img1'](https://github.com/user-attachments/assets/94d81ccd-66e0-4a3d-ad50-996356f0a0cd)
+
+Load the poly.mag file by passing ``` load poly.mag ``` in the console window
 ![img89](https://github.com/user-attachments/assets/b7754fde-4291-455f-8fa5-3ae82cb594f9)
+
+Select the area between poly and poly resistor and pass ``` drc check ``` command
 ![img90](https://github.com/user-attachments/assets/f6be65f0-76b1-4b82-a8cb-4deb09650058)
+
 
 Now, to open the sky130A.tech file from the drc_tests director.
 Navigate to the keywords ' poly.9 ' in the file and make copy of the required lines and change *nsd and alldiff to allpolynonres.
 Save the changes
-<img width="1440" alt="Screenshot 2024-09-02 at 11 57 30 AM" src="https://github.com/user-attachments/assets/267d418b-6f82-4cfc-a26d-b0f2df71f5ae">
-<img width="1440" alt="Screenshot 2024-09-02 at 12 30 01 PM" src="https://github.com/user-attachments/assets/c684ee2e-23ad-4261-8781-5396b4521a1d">
+IMG91
+
+IMG92
+
+Now, to check the correction, use ``` tech load sky130A.tech ``` in the tkcon window. And then ``` drc_check ``` ``` drc_why ```
+IMG93
 
 
 
 
+##### Incorrectly implemented nwell.4 complex rule correction
+Load nwell.mag using ``` load nwell.mag ``` in the console window. 
+IMG94 
+
+IMG95
+
+To make below changes to the sky130A.tech file 
+IMG96
+
+##### Incorrectly implemented difftap.2 simple rule correction
+Opening difftap layout using ``` magic -d XR difftap & ``` in the terminal
+
+IMG97
+
+Checking drc
+IMG98
+
+making change in below space..
+IMG99
+
+..to the below
+IMG100
+
+
+IMG101
 
 ##  Day-4 Objective: OPTIMISING SYNTHESIS FOR SLACK VIOLATION AND PERFORMING CTS.
 
