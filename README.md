@@ -375,41 +375,42 @@ Select the area between poly and poly resistor and pass ``` drc check ``` comman
 Now, to open the sky130A.tech file from the drc_tests director.
 Navigate to the keywords ' poly.9 ' in the file and make copy of the required lines and change *nsd and alldiff to allpolynonres.
 Save the changes
-IMG91
+![IMG91](https://github.com/user-attachments/assets/c4461c33-a6c6-4627-9e8d-c81ec1c5c016)
 
-IMG92
+![IMG92](https://github.com/user-attachments/assets/af6597bd-51bb-4105-b724-24ad71ac2b2a)
+
 
 Now, to check the correction, use ``` tech load sky130A.tech ``` in the tkcon window. And then ``` drc_check ``` ``` drc_why ```
-IMG93
+![IMG93](https://github.com/user-attachments/assets/69a1ca46-6073-4bf2-bf98-8a97e0ad62a7)
 
 
 
 
 ##### Incorrectly implemented nwell.4 complex rule correction
 Load nwell.mag using ``` load nwell.mag ``` in the console window. 
-IMG94 
+![IMG94](https://github.com/user-attachments/assets/f8608830-6e48-4ab1-94fc-9ba40ca53afd)
 
-IMG95
+![IMG95](https://github.com/user-attachments/assets/40ac393d-7f66-4c17-b1d8-ca371a9ccd92)
 
 To make below changes to the sky130A.tech file 
-IMG96
+![IMG96](https://github.com/user-attachments/assets/6f731753-88df-4af3-b84a-36af50533853)
 
 ##### Incorrectly implemented difftap.2 simple rule correction
 Opening difftap layout using ``` magic -d XR difftap & ``` in the terminal
 
-IMG97
+![IMG97](https://github.com/user-attachments/assets/7d1a7960-b4f8-4aaa-aec8-57eb5057a283)
 
 Checking drc
-IMG98
+![IMG98](https://github.com/user-attachments/assets/a5233f6f-ed36-464f-8225-b0b2dc6fe652)
 
 making change in below space..
-IMG99
+![IMG99](https://github.com/user-attachments/assets/6b2f4adc-c875-4fee-abce-3694ac2396cc)
 
 ..to the below
-IMG100
+![IMG100](https://github.com/user-attachments/assets/d7a81264-3f40-483b-837f-42f8b5052998)
 
 
-IMG101
+![IMG101](https://github.com/user-attachments/assets/e6f4bfdd-5110-4a39-911c-24ebd27c0760)
 
 ##  Day-4 Objective: OPTIMISING SYNTHESIS FOR SLACK VIOLATION AND PERFORMING CTS.
 
