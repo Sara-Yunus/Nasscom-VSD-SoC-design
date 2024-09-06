@@ -3,7 +3,7 @@
 
 ## Day-1 Objective: TO CALCULATE THE FLOP RATIO
 
-Invoking the OpenLane tool.
+#### Invoking the OpenLane tool.
 ```bash
 # Change the directory to a required location using the following command in the terminal.
 cd Desktop/work/tools/openlane_working_dir/openlane
@@ -86,22 +86,25 @@ Modifying the design-related config.tcl
 
 System Default values of FP_IO_VMETAL, FP_IO_HMETAL & FP_CORE_UTIL can be found in 
 ``` ../Desktop/work/tools/openlane_working_dir/openlane/configurations$ less floorplan.tcl ```
+
 ![img9](https://github.com/user-attachments/assets/d9c50305-5850-4e82-9490-1cc0e55a1803)
 
-Modifications are shown in the below image
+Modifications are shown in the below image:
 ![img10](https://github.com/user-attachments/assets/6b98d387-e529-47c9-9955-ffd16f8545a9)
 
-After making the changes to the variables we can run floorplan in the OpenLane flow
+After making the changes to the variables we can run floorplan in the OpenLane flow using
+
 ``` run_floorplan ```
-This creates a .def file in the ../runs/31-08_20-19/results/floorplan 
+
+This creates a .def file in the ../runs/31-08_20-19/results/floorplan.
 ![img11](https://github.com/user-attachments/assets/69711fb8-a29b-443a-98cf-2febce408894)
 
-// To check whether the changes made in the config.tcl have taken precedence over the system default values or not we go to 
-``` ...logs/floorlan ``` in the date named directory.
+To check whether the changes made in the config.tcl have taken precedence over the system default values or not we go to 
+``` ...logs/floorplan ``` in the date-named directory.
 
 
 
-Now, viewing the floorplan in Magic layout tool.
+Now, viewing the floorplan in the Magic layout tool.
 ![img12](https://github.com/user-attachments/assets/317c2ccf-5d69-4446-adcb-6928f63fcbc4)
 ![img13](https://github.com/user-attachments/assets/2160e1de-7e95-4fa7-85e2-52cde4a0918d)
 ![img14](https://github.com/user-attachments/assets/a081d071-9d2e-4b2a-b971-1549381eb009)
@@ -134,10 +137,10 @@ Area\ of\ die\ in\ microns = 660.685 * 671.405 = 443587.212425\ Square\ Microns
 ```
 
 
-After floorplan, next stage is placement. We do ``` run_placement ``` in openlane flow. 
-As a result of placement a .def is created in ``` ...results/placement ``` in the date named directory.
+After the floorplan, the next stage is placement. We do ``` run_placement ``` in openlane flow. 
+As a result of placement a .def is created in ``` ...results/placement ``` in the date-named directory.
 
-Magic layout of placement are shown below.
+Magic layouts of placement are shown below.
 
 ![img16](https://github.com/user-attachments/assets/ccb780ad-5036-4d20-8a2c-a3e06e2b42fb)
 ![img17](https://github.com/user-attachments/assets/61945ea9-f8f0-4e09-b908-122c3c6bf008)
@@ -170,6 +173,7 @@ For extracting the inverter in .spice file, we pass following command one by one
 3- ``` ext2spice cthresh 0 rthresh 0 ```
 
 4- ``` ext2spice ```
+
 ![img23](https://github.com/user-attachments/assets/73b791af-5346-4cbb-96f7-3b1ad59a3b99)
 
 
@@ -214,7 +218,7 @@ Plotting the transient response
  
 ![img25](https://github.com/user-attachments/assets/335037a3-bb94-4e94-92f8-e1248ba491e8)
 
-##### Characterising the Inverter cell
+#### Characterising the Inverter cell
 
 Finding the values of 
 * rise transition
@@ -274,7 +278,7 @@ min value = 0V
   -in the tkcon window:
   * ``` help grid ```
   * ``` grid 0.46um 0.34um 0.23um 0.17um ```
-  * 
+    
   ![img28](https://github.com/user-attachments/assets/d0462ed1-e898-4c94-9c2a-4bee4d7bbf4b)
 
 Giving a new name to our custom cell and generating .lef file
@@ -282,7 +286,7 @@ Giving a new name to our custom cell and generating .lef file
 -in the tkcon window: 
 * ``` save sky130A_vsdinv.mag ```
 * ``` lef write ```
-* 
+  
 A new .lef file will be added in vsdstdcelldesign directory
 ![img29](https://github.com/user-attachments/assets/544bc355-6c9c-48c6-9bd3-46cb24393f3e)
 
