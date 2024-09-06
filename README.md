@@ -377,13 +377,13 @@ from here, select met3.mag and open
  select the area of any of the elements and using ``` drc why ``` in the tkcon window will tell which drc rule got violated for that design
 ![img87](https://github.com/user-attachments/assets/6027b35b-1c99-4a65-a094-f1ce675f743f)
 
-For metal3 all rules are related to drawn layers, except for rule m3.4
+For metal3 all rules are related to drawn layers, except for rule m3.4.
  Now, select an area in the gui and guide the pointer on to the metal 3 layer and press P. The selected region will be filled with metal 3. 
- Now in console window type the command ``` cif see VIA2 ``` , The metal 3 filled area will be filled VIA2 mask.
+ Now in console window type the command ``` cif see VIA2 ``` . The metal 3 filled area will be filled VIA2 mask.
  ![img88](https://github.com/user-attachments/assets/be59f4e0-952b-4d94-92d2-ba39d36e2960)
 
  
-##### Incorrectly implemented poly.9 simple rule correction
+#### Incorrectly implemented poly.9 simple rule correction
 The correct rule is shown below in the screenshot of https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html#m3
 ![img1'](https://github.com/user-attachments/assets/94d81ccd-66e0-4a3d-ad50-996356f0a0cd)
 
@@ -408,7 +408,7 @@ Now, to check the correction, use ``` tech load sky130A.tech ``` in the tkcon wi
 
 
 
-##### Incorrectly implemented nwell.4 complex rule correction
+#### Incorrectly implemented nwell.4 complex rule correction
 Load nwell.mag using ``` load nwell.mag ``` in the console window. 
 ![IMG94](https://github.com/user-attachments/assets/f8608830-6e48-4ab1-94fc-9ba40ca53afd)
 
@@ -417,7 +417,7 @@ Load nwell.mag using ``` load nwell.mag ``` in the console window.
 To make below changes to the sky130A.tech file 
 ![IMG96](https://github.com/user-attachments/assets/6f731753-88df-4af3-b84a-36af50533853)
 
-##### Incorrectly implemented difftap.2 simple rule correction
+#### Incorrectly implemented difftap.2 simple rule correction
 Opening difftap layout using ``` magic -d XR difftap & ``` in the terminal
 
 ![IMG97](https://github.com/user-attachments/assets/7d1a7960-b4f8-4aaa-aec8-57eb5057a283)
@@ -446,14 +446,14 @@ Then created a file called ``` my_base.sdc ``` in ..design/picorv32/src using ``
 then 
 ``` .../openlane$ sta pre_sta.conf ```
 ![img43](https://github.com/user-attachments/assets/b29fe6c7-2bc4-4962-b74c-3fc82ded683d)
-the slack violation value is same as what it was in synthesis step(img33)
+the slack violation value is, and should be, same as what it was in synthesis step.
 
-Optimisng the design for slack reduction
+#### Optimisng the design for slack reduction
 
 Noticed that the net instance _10566_ has a fanout of 4 and is driven by or gate of size 3_4
 ![img44](https://github.com/user-attachments/assets/2ca63f63-ecd9-4b4e-ab64-4a762a14b9bb)
 
-so replacinf this instance with _13165_ or gate of size 3_4
+So, replacing this instance with _13165_ or gate of size 3_4
 ![img45](https://github.com/user-attachments/assets/8c4d91d4-7a7b-4269-8cf0-a5e903b30336)
 
 with this we observe reduction in slack from -23.89 to -23.5184
@@ -463,63 +463,68 @@ with this we observe reduction in slack from -23.89 to -23.5184
 Noticed that the or gate of driving strenth 2 driving OA gate has more delay
 ![img47](https://github.com/user-attachments/assets/602424c3-c7c3-46e9-9383-cf62339053a1)
 
-so replacing this instance with _13132_ or gate of size 4_4
+So, replacing this instance with _13132_ or gate of size 4_4
 ![img48](https://github.com/user-attachments/assets/3cbdabb6-6fc8-46e7-8669-26f4b904182f)
 
 with this we observe reduction in slack from -23.5184 to -23.5119
 ![img49](https://github.com/user-attachments/assets/b8be89f9-7d8f-4777-8db5-940bc0145984)
 
-So,now earlier the slack was -23.89 now it is -23.5119. That is, the slack has been reduced by 0.3781
-// -- command to verify that the instance _13132_ has been replaced from or4_2 to or4_4 --
-// ``` report_checks -from _26365_ -to _27762_ -through _13132 ```
+Earlier the slack was -23.89. Now it is -23.5119. That is, the slack has been reduced by 0.3781
 
-Replacing the old netlist with the new one post the fixes done above
+% -- command to verify that the instance _13132_ has been replaced from or4_2 to or4_4 --
+% ``` report_checks -from _26365_ -to _27762_ -through _13132 ```
+
+#### Replacing the old netlist with the new one post the done above fixes. 
 
 ```
-//making a copy of old netlist
+# making a copy of old netlist
 .../results/synthesis$ cp picorv32a.synthesis.v picorv32a.synthesis_old.v
 ```
 ![img50](https://github.com/user-attachments/assets/920e1970-11b3-4256-8ef2-5cd57cb21c28)
 
 NOW, overwriting the original netlist with the modified by passing the below command in OpenSTA flow itself 
 ```
-write_verilog /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/25-03_18-52/results/synthesis/picorv32a.synthesis.v
+write_verilog /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/01-09_15-02/results/synthesis/picorv32a.synthesis.v
 ```
 Updation of netlist can be verified by the new time indicated prior to verilog file 
 ![img51](https://github.com/user-attachments/assets/7563d5dc-9942-40c4-8e5d-3c4fc26a28ab)
 
-Verification that the instance _13132_ is replaced to sky130_fd_sc_hd__or4_4
+Verification of the instance _13132_ being replaced to sky130_fd_sc_hd__or4_4
 ![img52](https://github.com/user-attachments/assets/acba9888-c40d-4923-97f6-3d7a97766879)
 
-NOW RUNNING FLOORPLAN ON THE UPDATED NETLIST IN THE **OPENLANE** FLOW
+
+#### NOW RUNNING FLOORPLAN ON THE UPDATED NETLIST IN THE **OPENLANE** FLOW
+
 ![img53](https://github.com/user-attachments/assets/79306a65-eb51-4743-8f0e-928d1a28a942)
 RUNNING PLACEMENT 
 ![img54](https://github.com/user-attachments/assets/4c04eadd-c19c-43a9-8a10-0c90a8c776fb)
 
-RUNNING CTS
+#### RUNNING CTS
+
 ``` run_cts ```
+
 a new addition to ..results/synthesis directory 
 ![img55](https://github.com/user-attachments/assets/6d5ee517-3e6d-453e-b6a0-61346a1a2ae2)
 
-clock buffer can be viewed in CTS layout in Magic
+clock buffer can be viewed below in the CTS layout in Magic
 ![img56](https://github.com/user-attachments/assets/3b12c52d-875f-45da-9cb0-8d18222418a0)
 
 
-Timing analysis post-CTS( USING OpenROAD)
+#### Timing analysis post-CTS( USING OpenROAD)
 ```
 # Command to run OpenROAD tool
 openroad
 
 # Reading lef file
-read_lef /openLANE_flow/designs/picorv32a/runs/24-03_10-03/tmp/merged.lef
+read_lef /openLANE_flow/designs/picorv32a/runs/01-09_15-02/tmp/merged.lef
 
 # Reading def file
-read_def /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/cts/picorv32a.cts.def
+read_def /openLANE_flow/designs/picorv32a/runs/01-09_15-02/results/cts/picorv32a.cts.def
 
 # Creating an OpenROAD database to work with
 write_db pico_cts.db
 ```
-creation of database can be verified in openlane directory
+Creation of database can be verified in openlane directory
 ![img57](https://github.com/user-attachments/assets/c1288d55-6c38-480b-ba68-76664c8928aa)
 
 ```
@@ -527,7 +532,7 @@ creation of database can be verified in openlane directory
 read_db pico_cts.db
 
 # Read netlist post CTS
-read_verilog /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/synthesis/picorv32a.synthesis_cts.v
+read_verilog /openLANE_flow/designs/picorv32a/runs/01-09_15-02/results/synthesis/picorv32a.synthesis_cts.v
 
 # Read library for design
 read_liberty $::env(LIB_SYNTH_COMPLETE)
@@ -557,13 +562,13 @@ exit
 
 ![img59](https://github.com/user-attachments/assets/cce39fa6-e894-448c-90e5-12793be92119)
 
-hold slack met
+##### Hold slack, met.
 ![img60](https://github.com/user-attachments/assets/6ea29742-67b5-401f-98d0-ae734eaafc69)
 
-setup slack met 
+##### Setup slack, met. 
 ![img61](https://github.com/user-attachments/assets/f17054f0-24f7-43c3-8eac-2d9ed76f0d38)
 
-###### Checking how timing gets affected if I modify the buffer list
+#### Checking how timing gets affected on modifying the buffer list
 
 ```
 # Checking current value of 'CTS_CLK_BUFFER_LIST'
@@ -579,7 +584,7 @@ echo $::env(CTS_CLK_BUFFER_LIST)
 echo $::env(CURRENT_DEF)
 
 # Setting def as placement def
-set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/placement/picorv32a.placement.def
+set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/01-09_15-02/results/placement/picorv32a.placement.def
 
 # Run CTS again
 run_cts
@@ -591,10 +596,10 @@ echo $::env(CTS_CLK_BUFFER_LIST)
 openroad
 
 # Reading lef file
-read_lef /openLANE_flow/designs/picorv32a/runs/24-03_10-03/tmp/merged.lef
+read_lef /openLANE_flow/designs/picorv32a/runs/01-09_15-02/tmp/merged.lef
 
 # Reading def file
-read_def /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/cts/picorv32a.cts.def
+read_def /openLANE_flow/designs/picorv32a/runs/01-09_15-02/results/cts/picorv32a.cts.def
 
 # Creating an OpenROAD database to work with
 write_db pico_cts1.db
@@ -603,7 +608,7 @@ write_db pico_cts1.db
 read_db pico_cts.db
 
 # Read netlist post CTS
-read_verilog /openLANE_flow/designs/picorv32a/runs/24-03_10-03/results/synthesis/picorv32a.synthesis_cts.v
+read_verilog /openLANE_flow/designs/picorv32a/runs/01-09_15-02/results/synthesis/picorv32a.synthesis_cts.v
 
 # Read library for design
 read_liberty $::env(LIB_SYNTH_COMPLETE)
@@ -642,8 +647,8 @@ effect on hold slack
 ![img62](https://github.com/user-attachments/assets/af7e7930-9f8c-41ac-a8cf-d2860c51ead5)
 
 
-effect on setup slack
-![img63](https://github.com/user-attachments/assets/9a7c4b74-193b-49f3-8d7b-e0fa35b2f6f7)3
+Effect on setup slack
+![img63](https://github.com/user-attachments/assets/9a7c4b74-193b-49f3-8d7b-e0fa35b2f6f7)
 
 ![img64](https://github.com/user-attachments/assets/c3fd2e53-854a-4a7e-84b1-d8c8867f989f)
 
@@ -696,39 +701,41 @@ run_cts
 # Now that CTS is done we can do power distribution network
 run_power_grid_generation
 
-//gen_pdn
 ```
 ![img65](https://github.com/user-attachments/assets/925db033-6c5e-4a45-b6cf-61872eae0567)
 ![img66](https://github.com/user-attachments/assets/94ea7ddb-3f3e-43dd-916c-c68ee2fffb65)
 
-Magic Layout for generated PDN
+Magic Layout for generated PDN:
+
 ![img67](https://github.com/user-attachments/assets/97de4c17-1f54-48d9-93d6-d15f3a7ffec5)
 ![img68](https://github.com/user-attachments/assets/7e253cfa-f9bc-4439-802f-4bdde68f09bc)
 
 ``` run_routing ```
+
 ![img69](https://github.com/user-attachments/assets/5db899df-791b-4a4d-91ba-05e05870901b)
 ![img70](https://github.com/user-attachments/assets/079ed469-c3c6-4eb9-887e-a16bb1974ffd)
 ![img71](https://github.com/user-attachments/assets/6d0c863a-607f-4487-8182-dfeeeb6be942)
 
 
-Route layout in Magic
+Route layout in Magic:
+
 ![img72](https://github.com/user-attachments/assets/59128348-6096-452a-9189-a026f3140be9)
 ![img73](https://github.com/user-attachments/assets/7956daef-d15c-43d0-9797-76382ed4c54b)
 ![img74](https://github.com/user-attachments/assets/6e2dc285-45e9-45a1-8271-32a12066f684)
 ![img75](https://github.com/user-attachments/assets/1a8ab965-2dbb-4eeb-8c87-7d6d7ba5627a)
 
-Screenshot of fast route guide present in openlane/designs/picorv32a/runs/26-03_08-45/tmp/routing directory
+Screenshot of fast route guide present in openlane/designs/picorv32a/runs/02-09_18-54/tmp/routing directory
 ![img76](https://github.com/user-attachments/assets/b0a3449b-e3e1-4180-b102-fbf20272e417)
 
 
-####### Post-Route parasitic extraction using SPEF extractor.
+##### Post-Route parasitic extraction using SPEF extractor.
 ![img77](https://github.com/user-attachments/assets/e85b21f4-8d39-4ca7-86b2-3aaffd3add60)
 
-timing analysis
+##### timing analysis
 ![img78](https://github.com/user-attachments/assets/8f0ecd32-e843-4e82-976d-d78f1045d7bb)
 ![img79](https://github.com/user-attachments/assets/023fde86-6c50-4869-8907-86d12d6442c5)
 
-###### Post-Route OpenSTA timing analysis with the extracted parasitics of the route.
+#### Post-Route OpenSTA timing analysis with the extracted parasitics of the route.
 ```
 # Command to run OpenROAD tool
 openroad
@@ -769,8 +776,10 @@ report_checks -path_delay min_max -fields {slew trans net cap input_pins} -forma
 # Exit to OpenLANE flow
 exit
 ```
-hold slack
+Hold slack:
+
 ![img80](https://github.com/user-attachments/assets/fd9202ff-db10-4e97-8f82-376013ab5300)
 
-setup slack
+Setup slack:
+
 ![img81](https://github.com/user-attachments/assets/da0cbd12-b8f0-40e3-9685-52eb4d34daa9)
